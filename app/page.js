@@ -1,103 +1,114 @@
-import Image from "next/image";
+"use client";
+import Link from "next/link";
+import { useState } from "react";
+import AuthContainer from "./auth/AuthContainer";
+import { useAuth } from "./context/AuthContext"; 
 
 export default function Home() {
-  return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              app/page.js
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+  const { isConnected, login, register } = useAuth();
+  const [showAuthModal, setShowAuthModal] = useState(false);
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+  const handleLogin = (loginData) => {
+    login(loginData);
+    setShowAuthModal(false);
+  };
+
+  const handleRegister = (registerData) => {
+    register(registerData);
+    setShowAuthModal(false); 
+  };
+
+  const openAuthModal = () => {
+    setShowAuthModal(true);
+  };
+
+  const closeAuthModal = () => {
+    setShowAuthModal(false);
+  };
+
+  return (  
+      <div className="relative min-h-screen flex flex-col justify-center items-center overflow-hidden">
+        {/* Fond animé */}
+        <div className="dark-bg-animated fixed inset-0 w-full h-full -z-10" />
+        
+        {/* Bouton de déconnexion supprimé car maintenant dans la navbar */}
+
+        <div className="container py-10">
+        <div className="text-center mb-10">
+          <div className="mb-6 animate-bounce flex justify-center">
+            {/* Mascotte SVG */}
+            <svg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <ellipse cx="50" cy="60" rx="40" ry="30" fill="#222b3a"/>
+              <ellipse cx="50" cy="60" rx="30" ry="22" fill="#0dcaf0"/>
+              <circle cx="40" cy="55" r="6" fill="#6610f2"/>
+              <circle cx="60" cy="55" r="6" fill="#6610f2"/>
+              <ellipse cx="50" cy="75" rx="12" ry="6" fill="#20c997"/>
+              <ellipse cx="50" cy="80" rx="6" ry="2" fill="#111"/>
+              <ellipse cx="40" cy="53" rx="2" ry="1" fill="#fff"/>
+              <ellipse cx="60" cy="53" rx="2" ry="1" fill="#fff"/>
+              <path d="M44 70 Q50 78 56 70" stroke="#fff" strokeWidth="2" fill="none"/>
+              <ellipse cx="50" cy="65" rx="18" ry="6" fill="#111" fillOpacity="0.12"/>
+            </svg>
+          </div>
+          <h1 className="text-4xl md:text-5xl font-bold text-cyan-300 mb-4 drop-shadow">
+            Bienvenue dans ta Généalogie Familiale !
+          </h1>
+          <p className="text-lg md:text-xl text-cyan-100 mb-2">
+            Découvre, gère et amuse-toi avec ta grande Famille.<br/>
+            Ajoute des membres, explore les arbres, et partage la joie des liens familiaux !
+          </p>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+
+        {/* Bouton de connexion si pas connecté */}
+        {!isConnected && (
+          <div className="flex justify-center">
+            <button 
+              onClick={openAuthModal}
+              className="btn bg-gradient-to-r from-cyan-500 to-purple-600 hover:from-cyan-600 hover:to-purple-700 text-white font-bold py-3 px-8 rounded-lg shadow-lg hover:scale-105 transition transform"
+            >
+              Se connecter / S&#39;enregistrer
+            </button>
+          </div>
+        )}
+
+        {/* Modal d'authentification */}
+        {showAuthModal && (
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+            <div className="relative max-w-md w-full">
+              {/* Bouton de fermeture */}
+              <button
+                onClick={closeAuthModal}
+                className="absolute -top-4 -right-4 bg-red-500 hover:bg-red-600 text-white rounded-full w-8 h-8 flex items-center justify-center text-lg font-bold z-10 shadow-lg transition"
+              >
+                ×
+              </button>
+              
+              {/* Composant d'authentification */}
+              <AuthContainer onLogin={handleLogin} onRegister={handleRegister} />
+            </div>
+          </div>
+        )}
+
+        {/* Cartes familles et personnes - visibles seulement si connecté */}
+        {isConnected && (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 justify-center max-w-3xl mx-auto">
+            <div className="card bg-gradient-to-r from-cyan-400 to-purple-700 text-white shadow-lg animate-pop p-8 flex flex-col items-center">
+              <h5 className="text-2xl font-bold mb-2">Familles</h5>
+              <p className="mb-4">Voir, ajouter ou modifier les Familles.</p>
+              <Link href="/familles" className="btn bg-white text-cyan-700 font-bold py-2 px-6 rounded shadow hover:scale-105 transition">
+                Voir les familles
+              </Link>
+            </div>
+            <div className="card bg-gradient-to-r from-green-400 to-cyan-400 text-gray-900 shadow-lg animate-pop p-8 flex flex-col items-center" style={{animationDelay: '0.2s'}}>
+              <h5 className="text-2xl font-bold mb-2">Personnes</h5>
+              <p className="mb-4">Voir, ajouter ou modifier les membres.</p>
+              <Link href="/personnes" className="btn bg-white text-cyan-700 font-bold py-2 px-6 rounded shadow hover:scale-105 transition">
+                Gérer les personnes
+              </Link>
+            </div>
+          </div>
+        )}
+      </div>
     </div>
   );
 }
