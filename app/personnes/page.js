@@ -250,29 +250,29 @@ export default function PersonnesList() {
       
       {/* Barre de recherche avec bouton d'ajout */}
       <div className="mb-6">
-        <div className="flex items-center gap-4 bg-gray-800 bg-opacity-50 backdrop-blur-sm rounded-lg p-4 shadow-lg">
+        <div className="flex flex-col sm:flex-row sm:items-center gap-4 bg-gray-800 bg-opacity-50 backdrop-blur-sm rounded-lg p-4 shadow-lg">
           <label htmlFor="search" className="text-cyan-100 font-medium whitespace-nowrap">
             Rechercher :
           </label>
+
           <input
             id="search"
             type="text"
             placeholder="Nom, prénom, lieu..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="flex-1 px-4 py-2 rounded-md bg-gray-700 text-white placeholder-gray-400 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:border-cyan-400"
+            className="flex-1 px-4 py-2 rounded-md bg-gray-700 text-white placeholder-gray-400 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:border-cyan-400 w-full sm:w-auto"
           />
           {isAdmin && (
             <Link
               href="/personnes/new"
-              className="bg-gradient-to-r from-cyan-400 to-purple-700 text-white font-bold py-2 px-6 rounded-md shadow hover:scale-105 transition whitespace-nowrap"
+              className="bg-gradient-to-r from-cyan-400 to-purple-700 text-white font-bold py-2 px-6 rounded-md shadow hover:scale-105 transition w-full sm:w-auto text-center"
             >
               + Ajouter une personne
             </Link>
           )}
-        </div>       
+        </div>
       </div>
-
       <div className="overflow-x-auto rounded-2xl shadow-lg">
         <table className="min-w-full table-auto bg-gray-900 text-white">
           <thead>

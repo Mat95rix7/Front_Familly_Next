@@ -116,28 +116,31 @@ export default function PersonneDetail() {
                 {personne.notes}
               </div>
             )}
-            <div className="flex justify-center gap-3 mt-4">
-              {isAdmin && (
-                <>
-                  <button
-                    onClick={() => router.push(`/personnes/${id}/edit`)}
-                    className="min-w-[140px] inline-flex items-center justify-center gap-2 bg-gradient-to-r from-yellow-400 to-yellow-600 text-gray-900 font-bold py-2 px-5 rounded shadow-md hover:scale-105 transition text-base no-underline focus:outline-none"
-                  >
-                    <PencilSquareIcon className="w-5 h-5" /> Modifier
-                  </button>
-                  <button
-                    onClick={handleDelete}
-                    className="min-w-[140px] inline-flex items-center justify-center gap-2 bg-gradient-to-r from-pink-500 to-red-600 text-white font-bold py-2 px-5 rounded shadow-md hover:scale-105 transition text-base appearance-none border-none focus:outline-none"
-                    type="button"
-                  >
-                    <TrashIcon className="w-5 h-5" /> Supprimer
-                  </button>
-                </>
-              )}
-
+            <div className="flex flex-col sm:flex-row justify-center gap-3 mt-4">
+              {/* Modifier + Supprimer groupés */}
+              <div className="flex flex-row gap-3 w-full sm:w-auto">
+                {isAdmin && (
+                  <>
+                    <button
+                      onClick={() => router.push(`/personnes/${id}/edit`)}
+                      className="flex-1 sm:min-w-[140px] inline-flex items-center justify-center gap-2 bg-gradient-to-r from-yellow-400 to-yellow-600 text-gray-900 font-bold py-2 px-4 rounded shadow-md hover:scale-105 transition text-base focus:outline-none"
+                    >
+                      <PencilSquareIcon className="w-5 h-5" /> Modifier
+                    </button>
+                    <button
+                      onClick={handleDelete}
+                      className="flex-1 sm:min-w-[140px] inline-flex items-center justify-center gap-2 bg-gradient-to-r from-pink-500 to-red-600 text-white font-bold py-2 px-4 rounded shadow-md hover:scale-105 transition text-base focus:outline-none"
+                      type="button"
+                    >
+                      <TrashIcon className="w-5 h-5" /> Supprimer
+                    </button>
+                  </>
+                )}
+              </div>
+              {/* Retour à la liste */}
               <button
                 onClick={() => router.push(`/personnes`)}
-                className="min-w-[140px] inline-flex items-center justify-center gap-2 bg-gray-700 text-white font-bold py-2 px-5 rounded shadow-md hover:scale-105 transition text-base no-underline focus:outline-none"
+                className="w-full sm:min-w-[140px] inline-flex items-center justify-center gap-2 bg-gray-700 text-white font-bold py-2 px-4 rounded shadow-md hover:scale-105 transition text-base focus:outline-none"
               >
                 <ArrowLeftIcon className="w-5 h-5" /> Retour à la liste
               </button>
