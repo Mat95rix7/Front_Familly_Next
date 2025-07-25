@@ -5,6 +5,7 @@ import Link from "next/link";
 import { apiFetch, getPhotoUrl } from "../../components/FetchAPI";
 import Image from "next/image";
 
+
 function formatDateFR(dateStr) {
   if (!dateStr) return "";
   const date = new Date(dateStr);
@@ -15,59 +16,65 @@ function formatDateFR(dateStr) {
   });
 }
 
-function FamilyMember({ role, personne, link }) {
+function ConditionalWrapper({ condition, wrapper, children }) {
+  return condition ? wrapper(children) : children;
+}
+
+function FamilyMember({ role, personne, link, small = false, disabled = false }) {
   const hasData = !!personne;
   const altText = hasData
     ? `Photo de ${personne.first_name}`
     : `Photo par défaut pour ${role}`;
 
-  const firstName = hasData ? personne.first_name : "Non renseigné";
+  const firstName = hasData ? personne.first_name : "Indéfini";
   const age = hasData ? `${personne.age ?? ""} ans` : "";
   const birth = hasData ? formatDateFR(personne.birth_date) : "";
 
-  return (
-    <div className="flex flex-col items-center min-w-[75px] md:min-w-[110px] mx-1">
+  const imageSize = small ? 60 : 100;
+  const containerMinW = small ? "min-w-[80px] md:min-w-[150px]" : "min-w-[120px] md:min-w-[200px]";
+
+  const card = (
+    <div
+      className={`flex flex-col items-center ${containerMinW} mx-2 p-1 md:p-4 bg-gradient-to-b from-cyan-950 via-cyan-900 to-cyan-800 rounded-2xl shadow-md border border-cyan-700 hover:shadow-cyan-400/40 hover:scale-105 transition-all duration-300 ease-in-out group`}
+    >
       <div className="text-cyan-400 text-sm mb-1 text-center">{role}</div>
 
-      {hasData ? (
-        <Link href={link} className="family-link group">
-          <Image
-            src={getPhotoUrl(personne.photo)}
-            alt={altText}
-            width={80}
-            height={80}
-            style={{ width: 80, height: 80, objectFit: "cover" }}
-            className="object-cover mx-auto rounded-full border-4 border-cyan-400 mb-3 shadow-md"
-          />
-        </Link>
-      ) : (
-        <Image
-          src={getPhotoUrl("default.png")}
-          alt={altText}
-          width={80}
-          height={80}
-          className="object-cover mx-auto rounded-full border-4 border-cyan-400 mb-3 shadow-md bg-gray-800"
-        />
-      )}
+      <Image
+        src={getPhotoUrl(hasData ? personne.photo : "default.png")}
+        alt={altText}
+        width={imageSize}
+        height={imageSize}
+        style={{ width: imageSize, height: imageSize, objectFit: "cover" }}
+        className={`rounded-full border-4 border-cyan-400 mb-2 shadow ${hasData ? "" : "bg-gray-700"}`}
+      />
 
       <div
-        className={`font-bold mt-2 family-label text-center ${
+        className={`font-bold mt-1 text-center text-sm ${
           hasData ? "group-hover:text-purple-500 transition" : "text-gray-400"
         }`}
       >
         {firstName}
       </div>
 
-      <div className="text-xs text-white bg-amber-600 px-2 py-1 mt-1 rounded font-semibold">
+      <div className="text-xs text-white bg-amber-600 text-center px-2 py-0.5 mt-1 rounded font-semibold">
         {age || "Âge inconnu"}
       </div>
 
-      <div className="text-xs text-gray-400 mt-1">
-        {birth || "Date inconnue"}
-      </div>
+      <div className="text-xs text-center text-gray-400 mt-1">{birth || "Date inconnue"}</div>
     </div>
   );
+
+  return (
+    <ConditionalWrapper
+      condition={!disabled && hasData && link && link !== "#"}
+      wrapper={(children) => <Link href={link} className="group">{children}</Link>}
+    >
+      {card}
+    </ConditionalWrapper>
+  );
 }
+
+
 
 export default function FamillePage() {
   const { id } = useParams();
@@ -117,11 +124,11 @@ export default function FamillePage() {
 
       {is_mari ? (
         <div className="family-tree flex flex-col items-center">
-          <div className="flex flex-nowrap justify-center gap-2 md:gap-10 mb-4 family-row w-full md:max-w-none px-4 overflow-x-auto custom-scrollbar">
-            <FamilyMember role="Grand-père paternel" personne={grand_pere_paternel} link={grand_pere_paternel ? `/personnes/${grand_pere_paternel.id}` : "#"} />
-            <FamilyMember role="Grand-mère paternelle" personne={grand_mere_paternelle} link={grand_mere_paternelle ? `/personnes/${grand_mere_paternelle.id}` : "#"} />
-            <FamilyMember role="Grand-père maternel" personne={grand_pere_maternel} link={grand_pere_maternel ? `/personnes/${grand_pere_maternel.id}` : "#"} />
-            <FamilyMember role="Grand-mère maternelle" personne={grand_mere_maternelle} link={grand_mere_maternelle ? `/personnes/${grand_mere_maternelle.id}` : "#"} />
+          <div className="flex justify-center gap-2 md:gap-10 mb-4 family-row w-full md:max-w-none px-2 md:px-4">
+            <FamilyMember role="Grand-père paternel" personne={grand_pere_paternel} link={grand_pere_paternel ? `/familles/${grand_pere_paternel.id}` : "#"} small />
+            <FamilyMember role="Grand-mère paternelle" personne={grand_mere_paternelle} link={grand_mere_paternelle ? `/familles/${grand_mere_paternelle.id}` : "#"} small />
+            <FamilyMember role="Grand-père maternel" personne={grand_pere_maternel} link={grand_pere_maternel ? `/familles/${grand_pere_maternel.id}` : "#"} small />
+            <FamilyMember role="Grand-mère maternelle" personne={grand_mere_maternelle} link={grand_mere_maternelle ? `/familles/${grand_mere_maternelle.id}` : "#"} small />
           </div>
 
           <svg className="w-full h-[30px]" viewBox="0 0 600 30" preserveAspectRatio="xMidYMid meet">
@@ -138,9 +145,9 @@ export default function FamillePage() {
             <line x1="75" y1="0" x2="65" y2="25" stroke="#0dcaf0" strokeWidth="1" />
           </svg>
 
-          <div className="flex justify-center gap-10 mb-4 family-row w-full max-w-md md:max-w-none px-4">
-            <FamilyMember role="Père" personne={pere} link={pere ? `/personnes/${pere.id}` : "#"} />
-            <FamilyMember role="Mère" personne={mere} link={mere ? `/personnes/${mere.id}` : "#"} />
+          <div className="flex justify-center gap-10 my-4 family-row w-full max-w-md md:max-w-none px-4">
+            <FamilyMember role="Père" personne={pere} link={""} disabled={true} />
+            <FamilyMember role="Mère" personne={mere} link={""} />
           </div>
 
           <svg className="w-full h-[30px]" viewBox="0 0 300 30" preserveAspectRatio="xMidYMid meet">
@@ -154,13 +161,36 @@ export default function FamillePage() {
           </svg>
           <div className="flex justify-center gap-6 mt-3 family-children flex-wrap px-4">
             {enfants && enfants.length > 0 ? (
-              enfants.map((enfant) => (
-                <FamilyMember key={enfant.id} role="Enfant" personne={enfant} link={`/personnes/${enfant.id}`} />
-              ))
+              enfants.map((enfant) => {
+                console.log(enfant);
+                const isMale = enfant?.gender === "Homme";
+                const isMarried = enfant?.conjointId;
+                let familyLink = '';
+                if (isMarried) {
+                  familyLink = isMale ? `/familles/${enfant.id}` : `/familles/${enfant.conjointId}`;
+                } 
+                return (
+                  <FamilyMember
+                    key={enfant.id}
+                    role="Enfant"
+                    personne={enfant}
+                    link={familyLink}
+                  />
+                );
+              })
             ) : (
               <div className="font-bold text-gray-400 family-label">Aucun enfant trouvé.</div>
             )}
           </div>
+          {/* <div className="flex justify-center gap-6 mt-3 family-children flex-wrap px-4">
+            {enfants && enfants.length > 0 ? (
+              enfants.map((enfant) => (
+                <FamilyMember key={enfant.id} role="Enfant" personne={enfant} link={`/familles/${enfant.id}`} />
+              ))
+            ) : (
+              <div className="font-bold text-gray-400 family-label">Aucun enfant trouvé.</div>
+            )}
+          </div> */}
         </div>
       ) : (
         <div className="bg-yellow-100 text-yellow-800 rounded p-4 text-center max-w-lg mx-auto mb-6">
