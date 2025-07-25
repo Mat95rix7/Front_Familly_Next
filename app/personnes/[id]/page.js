@@ -79,34 +79,34 @@ export default function PersonneDetail() {
           <div className="flex-1 w-full">
             <h2 className="text-2xl font-bold mb-2 flex items-center gap-2">
               {personne.first_name} {personne.last_name}
-              <span className="inline-block bg-gray-700 text-white text-xs font-semibold px-2 py-1 rounded ml-2 align-middle">
+              <span className="inline-block bg-amber-600 text-white text-xs font-bold px-2 py-1 rounded ml-2 align-middle">
                 {personne.age ? `${personne.age} ans` : ''}
               </span>
             </h2>
             <ul className="divide-y divide-gray-800 mb-3">
               <li className="flex items-center gap-2 py-2">
                 <CakeIcon className="w-5 h-5 text-cyan-400" />
-                <span className="font-semibold">Date de naissance :</span>
+                <span className="font-semibold text-cyan-400">Date de naissance :</span>
                 <span className="ml-1">{formatDateFR(personne.birth_date) || 'Non renseigné'}</span>
               </li>
               <li className="flex items-center gap-2 py-2">
                 <MapPinIcon className="w-5 h-5 text-cyan-400" />
-                <span className="font-semibold">Lieu de naissance :</span>
+                <span className="font-semibold text-cyan-400">Lieu de naissance :</span>
                 <span className="ml-1">{personne.birth_place || 'Non renseigné'}</span>
               </li>
               <li className="flex items-center gap-2 py-2">
                 <UserIcon className="w-5 h-5 text-cyan-400" />
-                <span className="font-semibold">Père :</span>
+                <span className="font-semibold text-cyan-400">Père :</span>
                 <span className="ml-1">{getNomPrenom(personne.father)}</span>
               </li>
               <li className="flex items-center gap-2 py-2">
                 <UserIcon className="w-5 h-5 text-cyan-400" />
-                <span className="font-semibold">Mère :</span>
+                <span className="font-semibold text-cyan-400">Mère :</span>
                 <span className="ml-1">{getNomPrenom(personne.mother)}</span>
               </li>
               <li className="flex items-center gap-2 py-2">
                 <HeartIcon className="w-5 h-5 text-pink-400" />
-                <span className="font-semibold">Conjoint :</span>
+                <span className="font-semibold text-cyan-400">Conjoint :</span>
                 <span className="ml-1">{getNomPrenom(personne.conjoint)}</span>
               </li>
             </ul>

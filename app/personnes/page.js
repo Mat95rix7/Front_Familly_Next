@@ -338,11 +338,13 @@ export default function PersonnesList() {
           </thead>
           <tbody>
             {sortedPersonnes.length > 0 ? sortedPersonnes.map(
-              (personne) => (
+              (personne, index) => (
                 <tr
                   key={personne.id}
                   onClick={() => router.push(`/personnes/${personne.id}`)}
-                  className="border-b border-gray-800 hover:bg-gray-800 transition cursor-pointer"
+                  className={`border-b border-gray-800 hover:bg-gray-800 transition cursor-pointer ${
+        index % 2 === 0 ? "bg-gray-800" : "bg-gray-750"
+      }`}
                 >
                   <td className="p-2 text-center">
                     <Image
