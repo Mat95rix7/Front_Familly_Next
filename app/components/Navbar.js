@@ -3,10 +3,14 @@ import Link from "next/link";
 import { useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import { Menu, X } from "lucide-react";
+import { useUserRole } from "../hooks/useUserRole";
 
 export default function Navbar() {
   const { isConnected, logout } = useAuth();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  
+  const role = useUserRole();
+  const isAdmin = role === 'admin';
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
@@ -50,6 +54,14 @@ export default function Navbar() {
               >
                 Familles
               </Link>
+              { isAdmin && (
+                <Link
+                  href="/admin"
+                  className="text-white font-semibold hover:text-cyan-300 transition"
+                >
+                  Administration
+                </Link>
+              )}
               <div
                 onClick={logout}
                 className="text-white font-semibold hover:text-cyan-300 transition cursor-pointer"
@@ -93,6 +105,13 @@ export default function Navbar() {
               onClick={closeMobileMenu}
             >
               Familles
+            </Link>
+            <Link
+              href="/admin"
+              className="text-white font-semibold hover:text-cyan-300 transition py-2"
+              onClick={closeMobileMenu}
+            >
+              Administration
             </Link>
             <div
               onClick={handleLogout}
