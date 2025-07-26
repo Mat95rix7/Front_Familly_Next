@@ -227,9 +227,9 @@ export default function PersonnesList() {
                   <td className="p-2 text-center">{personne.gender || ''}</td>
                   <td className="p-2 text-center">{formatDateFR(personne.birth_date)}</td>
                   <td className="p-2 text-center">{personne.birth_place || ''}</td>
-                  <td className="p-2 text-center">{personne.father ? `${personne.father.last_name} ${personne.father.first_name}` : ''}</td>
-                  <td className="p-2 text-center">{personne.mother ? `${personne.mother.last_name} ${personne.mother.first_name}` : ''}</td>
-                  <td className="p-2 text-center">{personne.conjoint ? `${personne.conjoint.last_name} ${personne.conjoint.first_name}` : ''}</td>
+                  <td className="p-2 text-center">{personne.father ? `${personne.father.first_name}` : ''}</td>
+                  <td className="p-2 text-center whitespace-nowrap">{personne.mother ? `${personne.mother.last_name} ${personne.mother.first_name}` : ''}</td>
+                  <td className="p-2 text-center whitespace-nowrap">{personne.conjoint ? `${personne.conjoint.last_name} ${personne.conjoint.first_name}` : ''}</td>
                 </tr>
               )
             ) : (
