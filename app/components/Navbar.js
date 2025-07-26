@@ -23,7 +23,7 @@ export default function Navbar() {
 
   return (
     <>
-      <nav className="w-full bg-gradient-to-r from-cyan-400 to-purple-700 border-b-4 border-cyan-400 shadow-lg py-3 px-6 flex items-center justify-between z-50 relative">
+      <nav className="w-full bg-gradient-to-r from-cyan-400 to-purple-700 border-b-4 border-cyan-400 shadow-lg py-2 px-6 flex items-center justify-between z-50 relative">
         <Link
           href="/"
           className="flex items-center space-x-3 group"
@@ -78,7 +78,7 @@ export default function Navbar() {
 
       {/* Mobile Menu (absolute, above page, no overlay) */}
       {isConnected && isMobileMenuOpen && (
-        <div className="absolute top-[64px] left-0 right-0 bg-purple-800 border-b-4 border-purple-400 shadow-lg z-50 md:hidden">
+        <div className="absolute top-[60px] left-0 right-0 bg-purple-800 border-b-4 border-purple-400 shadow-lg z-50 md:hidden">
           <div className="flex flex-col py-4 px-6 space-y-4">
             <Link
               href="/personnes"

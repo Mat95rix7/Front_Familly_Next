@@ -27,15 +27,12 @@ export default function Home() {
   };
 
   return (  
-      <div className="relative min-h-screen flex flex-col justify-center items-center overflow-hidden">
+      <div className="relative max-h-[90vh] flex flex-col justify-center items-center overflow-hidden">
         {/* Fond animé */}
-        <div className="dark-bg-animated fixed inset-0 w-full h-full -z-10" />
-        
-        {/* Bouton de déconnexion supprimé car maintenant dans la navbar */}
-
-        <div className="container py-10">
+      <div className="dark-bg-animated fixed inset-0 w-full h-full -z-10" />
+       <div className="container py-10">
         <div className="text-center mb-10">
-          <div className="mb-6 animate-bounce flex justify-center">
+          <div className="mb-2 animate-bounce flex justify-center">
             {/* Mascotte SVG */}
             <svg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
               <ellipse cx="50" cy="60" rx="40" ry="30" fill="#222b3a"/>
@@ -92,20 +89,24 @@ export default function Home() {
         {/* Cartes familles et personnes - visibles seulement si connecté */}
         {isConnected && (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 justify-center max-w-3xl mx-auto">
-            <div className="card bg-gradient-to-r from-cyan-400 to-purple-700 text-white shadow-lg animate-pop p-8 flex flex-col items-center">
-              <h5 className="text-2xl font-bold mb-2">Familles</h5>
-              <p className="mb-4">Voir, ajouter ou modifier les Familles.</p>
-              <Link href="/familles" className="btn bg-white text-cyan-700 font-bold py-2 px-6 rounded shadow hover:scale-105 transition">
-                Voir les familles
-              </Link>
-            </div>
-            <div className="card bg-gradient-to-r from-green-400 to-cyan-400 text-gray-900 shadow-lg animate-pop p-8 flex flex-col items-center" style={{animationDelay: '0.2s'}}>
-              <h5 className="text-2xl font-bold mb-2">Personnes</h5>
-              <p className="mb-4">Voir, ajouter ou modifier les membres.</p>
-              <Link href="/personnes" className="btn bg-white text-cyan-700 font-bold py-2 px-6 rounded shadow hover:scale-105 transition">
-                Gérer les personnes
-              </Link>
-            </div>
+            <Link href="/personnes">
+              <div className="card bg-gradient-to-r from-green-400 to-cyan-400 text-gray-900 shadow-lg animate-pop p-4 md:p-8 flex flex-col items-center" style={{animationDelay: '0.2s'}}>
+                <h5 className="text-3xl font-bold mb-2">Personnes</h5>
+                <p className="mb-4">Voir, ajouter ou modifier les membres.</p>
+                <div className="btn bg-gray-200 text-cyan-700 font-bold py-2 px-6 rounded shadow hover:scale-105 transition">
+                  Gérer les personnes
+                </div>
+              </div>
+            </Link>
+            <Link href="/familles">
+              <div className="card bg-gradient-to-r from-cyan-400 to-blue-400 text-gray-900 shadow-lg animate-pop p-4 md:p-8 flex flex-col items-center" style={{animationDelay: '0.4s'}}>
+                <h5 className="text-3xl font-bold mb-2">Familles</h5>
+                <p className="mb-4">Voir les familles.</p>
+                <div className="btn bg-gray-200 text-cyan-700 font-bold py-2 px-6 rounded shadow hover:scale-105 transition">
+                  Gérer les familles
+                </div>
+              </div>
+            </Link>
           </div>
         )}
       </div>

@@ -126,9 +126,9 @@ export default function FamillePage() {
         <div className="family-tree flex flex-col items-center">
           <div className="flex justify-center gap-2 md:gap-10 mb-4 family-row w-full md:max-w-none px-2 md:px-4">
             <FamilyMember role="Grand-père paternel" personne={grand_pere_paternel} link={grand_pere_paternel ? `/familles/${grand_pere_paternel.id}` : "#"} small />
-            <FamilyMember role="Grand-mère paternelle" personne={grand_mere_paternelle} link={grand_mere_paternelle ? `/familles/${grand_mere_paternelle.id}` : "#"} small />
+            <FamilyMember role="Grand-mère paternelle" personne={grand_mere_paternelle} link={grand_mere_paternelle ? `/familles/${grand_pere_paternel.id}` : "#"} small />
             <FamilyMember role="Grand-père maternel" personne={grand_pere_maternel} link={grand_pere_maternel ? `/familles/${grand_pere_maternel.id}` : "#"} small />
-            <FamilyMember role="Grand-mère maternelle" personne={grand_mere_maternelle} link={grand_mere_maternelle ? `/familles/${grand_mere_maternelle.id}` : "#"} small />
+            <FamilyMember role="Grand-mère maternelle" personne={grand_mere_maternelle} link={grand_mere_maternelle ? `/familles/${grand_pere_maternel.id}` : "#"} small />
           </div>
 
           <svg className="w-full h-[30px]" viewBox="0 0 600 30" preserveAspectRatio="xMidYMid meet">
