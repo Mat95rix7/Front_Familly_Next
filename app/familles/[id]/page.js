@@ -57,7 +57,7 @@ function FamilyMember({ role, personne, link, small = false, disabled = false })
       </div>
 
       <div className="text-xs text-white bg-amber-600 text-center px-2 py-0.5 mt-1 rounded font-semibold">
-        {age || "Âge inconnu"}
+        {age || "inconnu"}
       </div>
 
       <div className="text-xs text-center text-gray-400 mt-1">{birth || "Date inconnue"}</div>
