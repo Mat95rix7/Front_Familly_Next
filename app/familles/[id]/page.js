@@ -35,7 +35,7 @@ function FamilyMember({ role, personne, link, small = false, disabled = false })
 
   const card = (
     <div
-      className={`flex flex-col items-center ${containerMinW} mx-2 p-1 md:p-4 bg-gradient-to-b from-cyan-950 via-cyan-900 to-cyan-800 rounded-2xl shadow-md border border-cyan-700 hover:shadow-cyan-400/40 hover:scale-105 transition-all duration-300 ease-in-out group`}
+      className={`card flex flex-col items-center ${containerMinW} mx-2 p-1 md:p-4 bg-gradient-to-b from-cyan-950 via-cyan-900 to-cyan-800 rounded-2xl shadow-md border-2 ${['Père', 'Mère'].includes(role) ? 'border-yellow-500' : 'border-cyan-700'} hover:shadow-cyan-400/40 hover:scale-105 transition-all duration-300 ease-in-out group`}
     >
       <div className="text-cyan-400 text-sm mb-1 text-center">{role}</div>
 
