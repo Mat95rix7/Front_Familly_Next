@@ -142,14 +142,14 @@ const AdminDashboard = () => {
   // Interface de modification d'utilisateur
   const EditUserModal = ({ user, onSave, onCancel }) => (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-      <div className="bg-white rounded-lg p-6 w-full max-w-md">
+      <div className="bg-gray-800 rounded-lg p-6 w-full max-w-md">
         <h3 className="text-lg font-semibold mb-4">Modifier l&#39;utilisateur</h3>
         <div className="space-y-4">
           <input
             type="text"
             placeholder="Nom d'utilisateur"
             value={user.username}
-            onChange={(e) => setEditingUser({...user, username: e.target.value})}
+            onChange={e => setEditingUser({...user, username: e.target.value})}
             className="w-full p-2 border rounded-lg"
           />
           <input
@@ -162,7 +162,7 @@ const AdminDashboard = () => {
           <select
             value={user.role}
             onChange={(e) => setEditingUser({...user, role: e.target.value})}
-            className="w-full p-2 border rounded-lg"
+            className="w-full p-2 border rounded-lg bg-gray-700"
           >
             <option value="user">Utilisateur</option>
             <option value="admin">Administrateur</option>
@@ -198,7 +198,7 @@ const AdminDashboard = () => {
   // Interface de création d'utilisateur
   const CreateUserModal = () => (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-      <div className="bg-white rounded-lg p-6 w-full max-w-md">
+      <div className="bg-gray-800 rounded-lg p-6 w-full max-w-md">
         <h3 className="text-lg font-semibold mb-4">Créer un utilisateur</h3>
         <div className="space-y-4">
           <input
@@ -435,12 +435,12 @@ const AdminDashboard = () => {
             </div>
 
             {/* Table des utilisateurs */}
-            <div className="bg-white shadow overflow-hidden sm:rounded-md">
-              <ul className="divide-y divide-gray-200">
+            <div className=" overflow-hidden sm:rounded-md">
+              <ul className="">
                 {users
                 .sort((a, b) => (a.role === 'admin' ? -1 : 1))
                 .map((user) => (
-                  <li key={user.id} className="px-6 py-4 bg-red-50 hover:bg-gray-50 transition">
+                  <li key={user.id} className="card !mx-5 !my-5 !bg-cyan-200  shadow-lg rounded-2xl h-full p-6">
                     <div className="flex items-center justify-between ">
                       <div className="flex items-center">
                         <div className={`flex-shrink-0 h-10 w-10 rounded-full flex items-center justify-center ${
@@ -453,12 +453,12 @@ const AdminDashboard = () => {
                         </div>
                         <div className="ml-4">
                           <div className="flex items-center">
-                            <p className="text-sm font-medium text-gray-200">{user.username}</p>
+                            <p className="text-xl font-bold text-gray-700">{user.username}</p>
                             {!user.isActive && (
                               <UserX className="h-4 w-4 text-red-500 ml-2" />
                             )}
                           </div>
-                          <p className="text-sm text-gray-400">{user.email}</p>
+                          <p className="text-sm text-blue-800">{user.email}</p>
                           <div className="flex items-center mt-1">
                             <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
                               user.role === 'admin' 

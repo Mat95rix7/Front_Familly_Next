@@ -182,15 +182,6 @@ export default function FamillePage() {
               <div className="font-bold text-gray-400 family-label">Aucun enfant trouvé.</div>
             )}
           </div>
-          {/* <div className="flex justify-center gap-6 mt-3 family-children flex-wrap px-4">
-            {enfants && enfants.length > 0 ? (
-              enfants.map((enfant) => (
-                <FamilyMember key={enfant.id} role="Enfant" personne={enfant} link={`/familles/${enfant.id}`} />
-              ))
-            ) : (
-              <div className="font-bold text-gray-400 family-label">Aucun enfant trouvé.</div>
-            )}
-          </div> */}
         </div>
       ) : (
         <div className="bg-yellow-100 text-yellow-800 rounded p-4 text-center max-w-lg mx-auto mb-6">
