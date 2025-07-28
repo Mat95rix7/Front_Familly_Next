@@ -19,18 +19,19 @@ export default function PersonCard({ personne }) {
           className="rounded-full object-cover border-2 border-cyan-500"
         />
         <div className="flex-1">
-          <h3 className="text-cyan-200 font-bold text-lg">
+          <h3 className="text-cyan-200 font-bold">
             {personne.first_name} {personne.last_name}
           </h3>
-          <p>Père : <span className="text-gray-400">{personne.father ? personne.father.first_name : "Inconnu"}</span></p>
+          <p>{personne.gender === 'Homme' ? "Fils de " : "Fille de "}<span className="text-gray-400">{personne.father ? personne.father.first_name : "Inconnu"}</span></p>
           <p className="text-sm text-gray-400">
             {personne.gender || "Genre ?"} – {personne.birth_place || "Lieu ?"}
           </p>
         </div>
-        <div className="text-md bg-amber-600 text-gray-200 px-2 py-1 rounded-full">
+        <div className="text-md bg-amber-600 text-gray-200 px-2 py-1 rounded-lg font-bold">
           {birthYear}
         </div>
       </div>
     </Link>
   );
 }
+
