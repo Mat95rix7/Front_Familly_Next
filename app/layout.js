@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  title: "Ma Genealogie Familiale",
+  title: "My Genealogy",
   description: "Created By Mat95rix7",
 };
 

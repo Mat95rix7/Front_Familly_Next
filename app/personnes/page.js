@@ -207,7 +207,7 @@ export default function PersonnesList() {
               (personne, index) => (
                 <tr
                   key={personne.id}
-                  onClick={() => router.push(`/personnes/${personne.id}`)}
+                  onClick={() => router.push(`/personnes/${personne.id}/index`)}
                   className={`border-b border-gray-800 hover:bg-gray-800 transition cursor-pointer ${
         index % 2 === 0 ? "bg-gray-800" : "bg-gray-750"
       }`}

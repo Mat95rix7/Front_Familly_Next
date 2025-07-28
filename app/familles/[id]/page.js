@@ -31,11 +31,11 @@ function FamilyMember({ role, personne, link, small = false, disabled = false })
   const birth = hasData ? formatDateFR(personne.birth_date) : "";
 
   const imageSize = small ? 60 : 100;
-  const containerMinW = small ? "min-w-[80px] md:min-w-[150px]" : "min-w-[120px] md:min-w-[200px]";
+  const containerMinW = small ? "min-w-[80px] md:min-w-[150px] " : "min-w-[120px] md:min-w-[200px]";
 
   const card = (
     <div
-      className={`card flex flex-col items-center ${containerMinW} mx-2 p-1 md:p-4 bg-gradient-to-b from-cyan-950 via-cyan-900 to-cyan-800 rounded-2xl shadow-md border-2 ${['Père', 'Mère'].includes(role) ? 'border-yellow-500' : 'border-cyan-700'} hover:shadow-cyan-400/40 hover:scale-105 transition-all duration-300 ease-in-out group`}
+      className={`card flex flex-col items-center ${containerMinW} mx-2 !py-8 p-1 md:p-4 bg-gradient-to-b from-cyan-950 via-cyan-900 to-cyan-800 rounded-2xl shadow-md border-2 ${['Père', 'Mère'].includes(role) ? 'border-yellow-500' : 'border-cyan-700'} hover:shadow-cyan-400/40 hover:scale-105 transition-all duration-300 ease-in-out group`}
     >
       <div className="text-cyan-400 text-sm mb-1 text-center">{role}</div>
 
@@ -56,11 +56,15 @@ function FamilyMember({ role, personne, link, small = false, disabled = false })
         {firstName}
       </div>
 
-      <div className="text-xs text-white bg-amber-600 text-center px-2 py-0.5 mt-1 rounded font-semibold">
-        {age || "inconnu"}
-      </div>
+      <div className="absolute top-0 right-0 bg-yellow-400 text-gray-900 font-bold text-xs px-2 py-1 rounded-bl-lg rounded-tr-xl">
+          {age}
+        </div>
 
-      <div className="text-xs text-center text-gray-400 mt-1">{birth || "Date inconnue"}</div>
+      {/* <div className="text-xs text-white bg-amber-600 text-center px-2 py-0.5 mt-1 rounded font-semibold">
+        {age || "inconnu"}
+      </div> */}
+
+      <div className="text-xs text-center text-gray-300 mt-1">{birth || "Date inconnue"}</div>
     </div>
   );
 
@@ -159,10 +163,13 @@ export default function FamillePage() {
             <line x1="210" y1="0" x2="210" y2="30" stroke="#0dcaf0" strokeWidth="2" className="md:hidden" />
             <line x1="85" y1="30" x2="210" y2="30" stroke="#0dcaf0" strokeWidth="2" className="md:hidden" />
           </svg>
-          <div className="flex justify-center gap-6 mt-3 family-children flex-wrap px-4">
+          <div className="grid grid-cols-3 lg:grid-cols-4 gap-4 md:gap-10 mt-5 px-2 md:px-4">
             {enfants && enfants.length > 0 ? (
-              enfants.map((enfant) => {
-                console.log(enfant);
+              enfants
+              .slice() // pour ne pas muter l'original
+              .sort((a, b) => b.age - a.age)
+              .map((enfant) => {
+
                 const isMale = enfant?.gender === "Homme";
                 const isMarried = enfant?.conjointId;
                 let familyLink = '';
