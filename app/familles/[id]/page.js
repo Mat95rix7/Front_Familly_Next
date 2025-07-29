@@ -40,7 +40,8 @@ function FamilyMember({ role, personne, link, small = false, disabled = false })
       <div className="text-cyan-400 text-sm mb-1 text-center">{role}</div>
 
       <Image
-        src={getPhotoUrl(hasData ? personne.photo : "default.png")}
+        src={getPhotoUrl(personne.photo)}
+        // src={getPhotoUrl(hasData ? personne.photo : "default.png")}
         alt={altText}
         width={imageSize}
         height={imageSize}

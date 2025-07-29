@@ -66,8 +66,8 @@ export default function PersonneDetail() {
             <Image
               src={getPhotoUrl(personne.photo)}
               alt="Photo"
-              width={120}
-              height={120}
+              width={150}
+              height={150}
               className="rounded-full border-4 border-cyan-400 shadow-lg"
             />
             <div className="mt-2">

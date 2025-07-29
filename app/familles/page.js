@@ -102,7 +102,7 @@ export default function PeresList() {
                       width={90}
                       height={90}
                       style={{ width: 90, height: 90, objectFit: "cover" }}
-                      className="object-cover rounded-full border-4 border-cyan-400 mb-3 shadow-md"
+                      className="rounded-full border-4 border-cyan-400 mb-3 shadow-md"
                     />
                     <h4 className="text-xl font-bold mb-1">
                       {pere.last_name?.charAt(0)}. {pere.first_name}
