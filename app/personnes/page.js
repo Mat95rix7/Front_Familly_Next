@@ -3,7 +3,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { apiFetch } from "../components/FetchAPI";
 import PersonCard from "../components/PersonCard";
-import { useUserRole } from "../hooks/useUserRole";
+import { useAuth } from "../context/AuthContext";
 
 export default function PersonnesList() {
   const [personnes, setPersonnes] = useState([]);
@@ -11,7 +11,7 @@ export default function PersonnesList() {
   const [searchTerm, setSearchTerm] = useState("");
   const [sortConfig, setSortConfig] = useState({ key: null, direction: "asc" });
 
-  const role = useUserRole();
+  const { role } = useAuth();
   const isAdmin = role === "admin";
 
   useEffect(() => {
@@ -72,11 +72,12 @@ const handleSort = (key) => {
 
   return (
     <div className="container py-8 mx-auto">
-      <h1 className="text-3xl font-bold text-cyan-300 mb-6">Liste des personnes</h1>
+      <h1 className="text-3xl font-bold text-cyan-300 mb-6 mx-5 md:mx-0">Liste des personnes</h1>
 
       {/* Barre de recherche et bouton */}
       <div className="mb-6">
-        <div className="flex flex-col sm:flex-row sm:items-center gap-4 bg-gray-800 bg-opacity-50 backdrop-blur-sm rounded-lg p-4 shadow-lg">
+        <div className="flex flex-col sm:flex-row sm:items-center gap-4 bg-gray-800 bg-opacity-50 backdrop-blur-sm rounded-lg p-4 shadow-lg mx-5 md:mx-0">
+          <div className="flex items-center w-full gap-2">
           <label
             htmlFor="search"
             className="text-cyan-100 font-medium whitespace-nowrap"
@@ -91,10 +92,11 @@ const handleSort = (key) => {
             onChange={(e) => setSearchTerm(e.target.value)}
             className="flex-1 px-4 py-2 rounded-md bg-gray-700 text-white placeholder-gray-400 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:border-cyan-400 w-full sm:w-auto"
           />
+          </div>
           {isAdmin && (
             <Link
               href="/personnes/new"
-              className="font-bold py-2 px-6 rounded-md bg-cyan-600 hover:bg-cyan-700 text-white shadow w-full sm:w-auto text-center"
+              className="font-bold py-2 px-6 rounded-md bg-cyan-600 hover:bg-cyan-700 text-white shadow w-full sm:w-auto text-center whitespace-nowrap"
             >
               + Ajouter une personne
             </Link>

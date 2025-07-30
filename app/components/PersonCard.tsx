@@ -10,7 +10,7 @@ export default function PersonCard({ personne }) {
 
   return (
     <Link href={`/personnes/${personne.id}`} className="block">
-      <div className="bg-gray-800 rounded-xl p-4 shadow hover:shadow-lg hover:scale-[1.02] transition cursor-pointer flex items-center gap-4">
+      <div className="relative bg-gray-800 rounded-xl p-4 shadow hover:shadow-lg hover:scale-[1.02] transition cursor-pointer flex items-center gap-4 mx-5 md:mx-0">
         <Image
           src={getPhotoUrl(personne.photo || "")}
           alt={personne.first_name}
@@ -27,7 +27,7 @@ export default function PersonCard({ personne }) {
             {personne.gender || "Genre ?"} – {personne.birth_place || "Lieu ?"}
           </p>
         </div>
-        <div className="text-md bg-amber-600 text-gray-200 px-2 py-1 rounded-lg font-bold">
+              <div className="absolute top-0 right-0 bg-yellow-400 text-gray-900 font-bold text-md px-2 py-1 rounded-bl-lg rounded-tr-xl">
           {birthYear}
         </div>
       </div>
