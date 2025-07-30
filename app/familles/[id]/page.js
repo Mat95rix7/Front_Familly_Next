@@ -75,8 +75,6 @@ function FamilyMember({ role, personne, link, small = false, disabled = false })
   );
 }
 
-
-
 export default function FamillePage() {
   const { id } = useParams();
   const [famille, setFamille] = useState(null);

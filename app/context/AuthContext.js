@@ -223,6 +223,10 @@ export const AuthProvider = ({ children }) => {
         body: JSON.stringify({ username, password }),
       });
 
+      if (!res.ok) {
+        const errorData = await res.json();
+        throw new Error('Login failed', errorData.message);
+      } 
       const data = await res.json();
       if (!data.token) throw new Error('Token manquant');
 
@@ -242,6 +246,11 @@ export const AuthProvider = ({ children }) => {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ username, email, password }),
       });
+
+      if (!res.ok) {
+        const errorData = await res.json();
+        throw new Error('Register failed', errorData.message);
+      }
 
       const data = await res.json();
       if (!data.token) throw new Error('Token manquant');

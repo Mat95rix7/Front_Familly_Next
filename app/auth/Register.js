@@ -5,19 +5,14 @@ export default function Register({ onRegister }) {
   const [registerData, setRegisterData] = useState({ username: '', email: '', password: '' });
   const { register } = useAuth();
 
-  const handleSubmit = async(e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    const success = await register(registerData);
-    if (!success) {
-      console.error('Inscription echouee');
-      return;
-    }
     onRegister(registerData);
   };
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
-      <h3 className="text-xl font-bold text-cyan-300 mb-4 text-center">S&#39;inscrire</h3>
+      <h3 className="text-xl font-bold text-cyan-300 mb-4 text-center">Inscription</h3>
       
       <div>
         <label htmlFor="register-username" className="block text-cyan-200 text-sm font-medium mb-2">
@@ -66,7 +61,7 @@ export default function Register({ onRegister }) {
 
       <button
         type="submit"
-        className="w-full bg-gradient-to-r from-green-500 to-cyan-600 hover:from-green-600 hover:to-cyan-700 text-white font-bold py-3 px-4 rounded-md shadow-lg hover:scale-105 transition transform"
+        className="w-full !bg-gradient-to-r from-green-500 to-cyan-600 hover:from-green-600 hover:to-cyan-700 text-white font-bold py-3 px-4 rounded-md shadow-lg hover:scale-105 transition transform"
       >
         S&#39;inscrire
       </button>

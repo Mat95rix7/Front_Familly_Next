@@ -50,7 +50,7 @@ export default function PeresList() {
       <h1 className="text-3xl font-bold text-cyan-300 mb-8 text-center">
         Liste des Familles
       </h1>
-      <div className="mb-6 bg-gray-800 bg-opacity-50 backdrop-blur-sm rounded-lg p-4 shadow-lg flex flex-col sm:flex-row sm:items-center gap-4">
+      <div className="mb-6 bg-gray-800 bg-opacity-50 backdrop-blur-sm rounded-lg p-4 shadow-lg flex flex-col sm:flex-row sm:items-center gap-4 mx-5 md:mx-0">
         <div className="flex flex-1 items-center gap-4">
           <label
             htmlFor="search"
@@ -84,13 +84,13 @@ export default function PeresList() {
         </div>
       ) : groupBy ? (
         lastNames.map((lastName) => (
-          <div key={lastName} className="mb-10">
+          <div key={lastName} className="mb-10 mx-5 md:mx-0">
             <h2 className="text-2xl font-bold text-cyan-200 mb-4">{lastName}</h2>
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 ">
               {groupedFamilles[lastName].map((pere) => (
                 <div
                   key={pere.id}
-                  className="card bg-gray-900 text-white shadow-lg rounded-2xl h-full flex flex-col items-center p-6"
+                  className="card bg-gray-900 text-white shadow-lg rounded-2xl h-full flex flex-col items-center p-6 "
                 >
                   <Link
                     href={`/familles/${pere.id}`}
@@ -117,7 +117,7 @@ export default function PeresList() {
           </div>
         ))
       ) : (
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 mx-5 md:mx-0">
           {filteredfamilles.map((pere) => (
             <div
               key={pere.id}

@@ -10,15 +10,14 @@ export default function AuthContainer({ onLogin, onRegister }) {
       {/* Affichage conditionnel des formulaires */}
       {showLogin ? (
         <div>
-          <Login onLogin={onLogin} />
-          
+          <Login onLogin={onLogin} /> 
           {/* Lien vers inscription */}
           <div className="mt-6 text-center">
             <p className="text-cyan-200 text-sm">
               Vous n&#39;vez pas de compte ?{" "}
               <button
                 onClick={() => setShowLogin(false)}
-                className="text-cyan-300 hover:text-white font-medium underline transition"
+                className="!text-amber-500 !bg-gray-900 hover:!text-white font-medium underline transition"
               >
                 S&#39;inscrire
               </button>
@@ -35,7 +34,7 @@ export default function AuthContainer({ onLogin, onRegister }) {
               Vous avez déjà un compte ?{" "}
               <button
                 onClick={() => setShowLogin(true)}
-                className="text-cyan-300 hover:text-white font-medium underline transition"
+                className="!text-amber-500 !bg-gray-900 hover:!text-white font-medium underline transition"
               >
                 Se connecter
               </button>

@@ -1,23 +1,16 @@
 import { useState } from "react";
-import { useAuth } from "../context/AuthContext";
-
 export default function Login({ onLogin }) {
   const [loginData, setLoginData] = useState({ username: '', password: '' });
-  const [error, setError] = useState('');
-  const { login } = useAuth();
+  
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    const success = await login(loginData);
-    if (!success) {
-      setError('Identifiants invalides');
-    }
     onLogin(loginData);
   };
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
-      <h3 className="text-xl font-bold text-cyan-300 mb-4 text-center">Se connecter</h3>
+      <h3 className="text-xl font-bold text-cyan-300 mb-4 text-center">Connexion</h3>
       
       <div>
         <label htmlFor="login-username" className="block text-cyan-200 text-sm font-medium mb-2">
@@ -51,7 +44,7 @@ export default function Login({ onLogin }) {
 
       <button
         type="submit"
-        className="w-full bg-gradient-to-r from-cyan-500 to-purple-600 hover:from-cyan-600 hover:to-purple-700 text-white font-bold py-3 px-4 rounded-md shadow-lg hover:scale-105 transition transform"
+        className="w-full !bg-gradient-to-r from-cyan-500 to-purple-600 hover:from-cyan-600 hover:to-purple-700 text-white font-bold py-3 px-4 rounded-md shadow-lg hover:scale-105 transition transform"
       >
         Se connecter
       </button>

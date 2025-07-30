@@ -3,19 +3,55 @@ import Link from "next/link";
 import { useState } from "react";
 import AuthContainer from "./auth/AuthContainer";
 import { useAuth } from "./context/AuthContext"; 
+import { useRouter } from "next/navigation";
+import SuccessModal from "./components/SuccessModal";
 
 export default function Home() {
   const { isConnected, login, register, role } = useAuth();
   const [showAuthModal, setShowAuthModal] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+  const [type, setType] = useState('inscription');
+  const router = useRouter();
 
-  const handleLogin = (loginData) => {
-    login(loginData);
-    setShowAuthModal(false);
+  const handleLogin = async( loginData) => {
+    try {
+      const success = await login(loginData);
+      if (success) {
+        setType('connexion');
+        setShowModal(true);
+        setTimeout(() => {
+          setShowModal(false);
+          setShowAuthModal(false);
+          // router.push('/')
+        }, 2500);
+        console.log('Connexion reussie');
+      } else {
+        setShowAuthModal(true);
+        console.log('Connexion echouee');
+      }
+    } catch (error) {
+      setShowAuthModal(true);
+      console.error('Connexion echouee :', error);
+    }
+    
   };
 
-  const handleRegister = (registerData) => {
-    register(registerData);
-    setShowAuthModal(false); 
+  const handleRegister = async(registerData) => {
+    try {
+      const success = await register(registerData);
+      if (success) {
+        setType('inscription');
+        setShowModal(true);
+        setTimeout(() => {
+          setShowModal(false);
+          setShowAuthModal(false);
+          router.push('/')
+        }, 2500);
+        console.log('Inscription reussie');
+      }
+    } catch (error) {
+      console.error('Inscription echouee :', error);
+    }
   };
 
   const openAuthModal = () => {
@@ -61,7 +97,7 @@ export default function Home() {
           <div className="flex justify-center">
             <button 
               onClick={openAuthModal}
-              className="btn bg-gradient-to-r from-cyan-500 to-purple-600 hover:from-cyan-600 hover:to-purple-700 text-white font-bold py-3 px-8 rounded-lg shadow-lg hover:scale-105 transition transform"
+              className="btn !bg-gradient-to-r from-cyan-500 to-purple-600 hover:from-cyan-600 hover:to-purple-700 text-white font-bold py-3 px-8 rounded-lg shadow-lg hover:scale-105 transition transform"
             >
               Se connecter / S&#39;enregistrer
             </button>
@@ -75,13 +111,16 @@ export default function Home() {
               {/* Bouton de fermeture */}
               <button
                 onClick={closeAuthModal}
-                className="absolute -top-4 -right-4 bg-red-500 hover:bg-red-600 text-white rounded-full w-8 h-8 flex items-center justify-center text-lg font-bold z-10 shadow-lg transition"
+                className="absolute -top-0 -right-0 !bg-red-500 !hover:bg-red-600 text-white rounded-full w-8 h-8 flex items-center justify-center text-lg font-bold z-10 shadow-lg transition"
               >
                 ×
               </button>
               
               {/* Composant d'authentification */}
-              <AuthContainer onLogin={handleLogin} onRegister={handleRegister} />
+              <AuthContainer 
+                  onLogin={handleLogin} 
+                  onRegister={handleRegister}
+                  />
             </div>
           </div>
         )}
@@ -121,6 +160,7 @@ export default function Home() {
           </Link>
         )}
       </div>
+      <SuccessModal showModal={showModal} setShowModal={setShowModal} type={type} />
     </div>
   );
 }
