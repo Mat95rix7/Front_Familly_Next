@@ -12,7 +12,7 @@ export default function PersonCard({ personne }) {
     <Link href={`/personnes/${personne.id}`} className="block">
       <div className="bg-gray-800 rounded-xl p-4 shadow hover:shadow-lg hover:scale-[1.02] transition cursor-pointer flex items-center gap-4">
         <Image
-          src={getPhotoUrl(personne.photo)}
+          src={getPhotoUrl(personne.photo || "")}
           alt={personne.first_name}
           width={56}
           height={56}

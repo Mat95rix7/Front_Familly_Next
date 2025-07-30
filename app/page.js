@@ -5,7 +5,7 @@ import AuthContainer from "./auth/AuthContainer";
 import { useAuth } from "./context/AuthContext"; 
 
 export default function Home() {
-  const { isConnected, login, register } = useAuth();
+  const { isConnected, login, register, role } = useAuth();
   const [showAuthModal, setShowAuthModal] = useState(false);
 
   const handleLogin = (loginData) => {
@@ -86,28 +86,39 @@ export default function Home() {
           </div>
         )}
 
-        {/* Cartes familles et personnes - visibles seulement si connecté */}
         {isConnected && (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 justify-center max-w-3xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 justify-center max-w-4xl mx-5 md:mx-auto">
             <Link href="/personnes">
-              <div className="card bg-gradient-to-r from-green-400 to-cyan-400 text-gray-900 shadow-lg animate-pop p-4 md:p-8 flex flex-col items-center" style={{animationDelay: '0.2s'}}>
+              <div className="card bg-gradient-to-r from-green-400 to-cyan-400 text-gray-900 shadow-lg animate-pop p-4 md:p-8 flex flex-col items-center" style={{ animationDelay: '0.2s' }}>
                 <h5 className="text-3xl font-bold mb-2">Personnes</h5>
-                <p className="mb-4">Voir, ajouter ou modifier les membres.</p>
+                <p className="mb-4 text-center">Voir, ajouter ou modifier les membres.</p>
                 <div className="btn bg-gray-200 text-cyan-700 font-bold py-2 px-6 rounded shadow hover:scale-105 transition">
                   Gérer les personnes
                 </div>
               </div>
             </Link>
+
             <Link href="/familles">
-              <div className="card bg-gradient-to-r from-cyan-400 to-blue-400 text-gray-900 shadow-lg animate-pop p-4 md:p-8 flex flex-col items-center" style={{animationDelay: '0.4s'}}>
+              <div className="card bg-gradient-to-r from-cyan-400 to-blue-400 text-gray-900 shadow-lg animate-pop p-4 md:p-8 flex flex-col items-center" style={{ animationDelay: '0.4s' }}>
                 <h5 className="text-3xl font-bold mb-2">Familles</h5>
-                <p className="mb-4">Voir les familles.</p>
+                <p className="mb-4 text-center">Voir les familles.</p>
                 <div className="btn bg-gray-200 text-cyan-700 font-bold py-2 px-6 rounded shadow hover:scale-105 transition">
                   Gérer les familles
                 </div>
               </div>
             </Link>
           </div>
+        )}
+        {role === 'admin' && (
+          <Link href="/admin">
+            <div className="card bg-gradient-to-r from-purple-400 to-pink-400 text-gray-900 shadow-lg animate-pop p-4 md:p-8 flex flex-col items-center mt-10 max-w-4xl mx-5 md:mx-auto" style={{ animationDelay: '0.6s' }}>
+              <h5 className="text-3xl font-bold mb-2">Administration</h5>
+              <p className="mb-4 text-center">Gérer les utilisateurs, rôles et autres paramètres.</p>
+              <div className="btn bg-gray-200 text-purple-700 font-bold py-2 px-6 rounded shadow hover:scale-105 transition">
+                Administration
+              </div>
+            </div>
+          </Link>
         )}
       </div>
     </div>

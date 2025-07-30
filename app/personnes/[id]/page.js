@@ -64,7 +64,7 @@ export default function PersonneDetail() {
         <div className="flex flex-col md:flex-row items-center gap-8 p-8">
           <div className="text-center">
             <Image
-              src={getPhotoUrl(personne.photo)}
+              src={getPhotoUrl(personne.photo) || ""}
               alt="Photo"
               width={150}
               height={150}

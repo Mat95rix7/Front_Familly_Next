@@ -97,7 +97,7 @@ export default function PeresList() {
                     className="flex flex-col items-center text-white hover:text-cyan-300 transition"
                   >
                     <Image
-                      src={getPhotoUrl(pere.photo)}
+                      src={getPhotoUrl(pere.photo) || ""}
                       alt="Photo"
                       width={90}
                       height={90}
@@ -128,7 +128,7 @@ export default function PeresList() {
                 className="flex flex-col items-center text-white hover:text-cyan-300 transition"
               >
                 <Image
-                  src={getPhotoUrl(pere.photo)}
+                  src={getPhotoUrl(pere.photo) || ""}
                   alt="Photo"
                   width={90}
                   height={90}

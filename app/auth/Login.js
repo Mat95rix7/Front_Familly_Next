@@ -1,14 +1,17 @@
 import { useState } from "react";
+import { useAuth } from "../context/AuthContext";
 
 export default function Login({ onLogin }) {
   const [loginData, setLoginData] = useState({ username: '', password: '' });
+  const [error, setError] = useState('');
+  const { login } = useAuth();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Ici vous pouvez ajouter votre logique d'authentification
-    console.log('Login:', loginData);
-    
-    // Appeler la fonction onLogin passée en prop
+    const success = await login(loginData);
+    if (!success) {
+      setError('Identifiants invalides');
+    }
     onLogin(loginData);
   };
 

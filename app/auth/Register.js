@@ -1,14 +1,17 @@
 import { useState } from "react";
+import { useAuth } from "../context/AuthContext";
 
 export default function Register({ onRegister }) {
   const [registerData, setRegisterData] = useState({ username: '', email: '', password: '' });
+  const { register } = useAuth();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
-    // Ici vous pouvez ajouter votre logique d'inscription
-    console.log('Register:', registerData);
-    
-    // Appeler la fonction onRegister passée en prop
+    const success = await register(registerData);
+    if (!success) {
+      console.error('Inscription echouee');
+      return;
+    }
     onRegister(registerData);
   };
 

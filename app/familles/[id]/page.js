@@ -21,6 +21,7 @@ function ConditionalWrapper({ condition, wrapper, children }) {
 }
 
 function FamilyMember({ role, personne, link, small = false, disabled = false }) {
+  console.log(personne);
   const hasData = !!personne;
   const altText = hasData
     ? `Photo de ${personne.first_name}`
@@ -40,8 +41,7 @@ function FamilyMember({ role, personne, link, small = false, disabled = false })
       <div className="text-cyan-400 text-sm mb-1 text-center">{role}</div>
 
       <Image
-        src={getPhotoUrl(personne.photo)}
-        // src={getPhotoUrl(hasData ? personne.photo : "default.png")}
+        src={getPhotoUrl(personne?.photo || "")}
         alt={altText}
         width={imageSize}
         height={imageSize}
@@ -116,6 +116,10 @@ export default function FamillePage() {
     grand_mere_maternelle,
     is_mari,
   } = famille;
+
+  console.log('grand :', grand_mere_maternelle);
+  console.log('pere :', pere );
+
 
   return (
     <div className="container py-8 mx-auto">
