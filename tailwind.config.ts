@@ -1,5 +1,4 @@
 import type { Config } from "tailwindcss";
-import  defaultTheme  from "tailwindcss/defaultTheme";
 
 const config: Config = {
   darkMode: "class",
@@ -21,8 +20,8 @@ const config: Config = {
         dark: "#111",
       },
       fontFamily: {
-        sans: ["var(--font-geist-sans)", ...defaultTheme .sans],
-        mono: ["var(--font-geist-mono)", ...defaultTheme .mono],
+        sans: ["var(--font-geist-sans)", "ui-sans-serif", "system-ui"],
+        mono: ["var(--font-geist-mono)", "ui-monospace", "monospace"],
       },
       boxShadow: {
         glow: "0 6px 32px 0 #0dcaf0cc, 0 1.5px 0 #fff2",
