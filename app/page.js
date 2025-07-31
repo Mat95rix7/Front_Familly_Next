@@ -1,66 +1,11 @@
 "use client";
 import Link from "next/link";
-import { useState } from "react";
-import AuthContainer from "./auth/AuthContainer";
 import { useAuth } from "./context/AuthContext"; 
 import { useRouter } from "next/navigation";
-import SuccessModal from "./components/SuccessModal";
 
 export default function Home() {
-  const { isConnected, login, register, role } = useAuth();
-  const [showAuthModal, setShowAuthModal] = useState(false);
-  const [showModal, setShowModal] = useState(false);
-  const [type, setType] = useState('inscription');
+  const { isConnected, role } = useAuth();
   const router = useRouter();
-
-  const handleLogin = async( loginData) => {
-    try {
-      const success = await login(loginData);
-      if (success) {
-        setType('connexion');
-        setShowModal(true);
-        setTimeout(() => {
-          setShowModal(false);
-          setShowAuthModal(false);
-          // router.push('/')
-        }, 2500);
-        console.log('Connexion reussie');
-      } else {
-        setShowAuthModal(true);
-        console.log('Connexion echouee');
-      }
-    } catch (error) {
-      setShowAuthModal(true);
-      console.error('Connexion echouee :', error);
-    }
-    
-  };
-
-  const handleRegister = async(registerData) => {
-    try {
-      const success = await register(registerData);
-      if (success) {
-        setType('inscription');
-        setShowModal(true);
-        setTimeout(() => {
-          setShowModal(false);
-          setShowAuthModal(false);
-          router.push('/')
-        }, 2500);
-        console.log('Inscription reussie');
-      }
-    } catch (error) {
-      console.error('Inscription echouee :', error);
-    }
-  };
-
-  const openAuthModal = () => {
-    setShowAuthModal(true);
-  };
-
-  const closeAuthModal = () => {
-    setShowAuthModal(false);
-  };
 
   return (  
       <div className="relative max-h-[90vh] flex flex-col justify-center items-center overflow-hidden">
@@ -96,71 +41,49 @@ export default function Home() {
         {!isConnected && (
           <div className="flex justify-center">
             <button 
-              onClick={openAuthModal}
+              onClick={() => router.push('/auth/login') }
               className="btn !bg-gradient-to-r from-cyan-500 to-purple-600 hover:from-cyan-600 hover:to-purple-700 text-white font-bold py-3 px-8 rounded-lg shadow-lg hover:scale-105 transition transform"
             >
               Se connecter / S&#39;enregistrer
             </button>
           </div>
         )}
-
-        {/* Modal d'authentification */}
-        {showAuthModal && (
-          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-            <div className="relative max-w-md w-full">
-              {/* Bouton de fermeture */}
-              <button
-                onClick={closeAuthModal}
-                className="absolute -top-0 -right-0 !bg-red-500 !hover:bg-red-600 text-white rounded-full w-8 h-8 flex items-center justify-center text-lg font-bold z-10 shadow-lg transition"
-              >
-                ×
-              </button>
-              
-              {/* Composant d'authentification */}
-              <AuthContainer 
-                  onLogin={handleLogin} 
-                  onRegister={handleRegister}
-                  />
-            </div>
-          </div>
-        )}
-
         {isConnected && (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 justify-center max-w-4xl mx-5 md:mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8 justify-center">
             <Link href="/personnes">
-              <div className="card bg-gradient-to-r from-green-400 to-cyan-400 text-gray-900 shadow-lg animate-pop p-4 md:p-8 flex flex-col items-center" style={{ animationDelay: '0.2s' }}>
-                <h5 className="text-3xl font-bold mb-2">Personnes</h5>
-                <p className="mb-4 text-center">Voir, ajouter ou modifier les membres.</p>
-                <div className="btn bg-gray-200 text-cyan-700 font-bold py-2 px-6 rounded shadow hover:scale-105 transition">
+              <div className="card bg-gradient-to-r from-green-400 to-cyan-400 text-gray-900 shadow-lg animate-pop p-3 md:p-8 flex flex-col items-center  w-full max-w-sm md:max-w-4xl mx-auto px-4 md:px-0" style={{ animationDelay: '0.2s' }}>
+                <h5 className="text-xl md:text-3xl font-bold mb-1 md:mb-2">Personnes</h5>
+                <p className="mb-2 md:mb-4 text-center text-sm md:text-base">Voir, ajouter ou modifier les membres.</p>
+                <div className="btn bg-gray-200 text-cyan-700 font-bold py-1.5 md:py-2 px-4 md:px-6 text-sm md:text-base rounded shadow hover:scale-105 transition">
                   Gérer les personnes
                 </div>
               </div>
             </Link>
 
             <Link href="/familles">
-              <div className="card bg-gradient-to-r from-cyan-400 to-blue-400 text-gray-900 shadow-lg animate-pop p-4 md:p-8 flex flex-col items-center" style={{ animationDelay: '0.4s' }}>
-                <h5 className="text-3xl font-bold mb-2">Familles</h5>
-                <p className="mb-4 text-center">Voir les familles.</p>
-                <div className="btn bg-gray-200 text-cyan-700 font-bold py-2 px-6 rounded shadow hover:scale-105 transition">
+              <div className="card bg-gradient-to-r from-cyan-400 to-blue-400 text-gray-900 shadow-lg animate-pop p-3 md:p-8 flex flex-col items-center  w-full max-w-sm md:max-w-4xl mx-auto px-4 md:px-0" style={{ animationDelay: '0.4s' }}>
+                <h5 className="text-xl md:text-3xl font-bold mb-1 md:mb-2">Familles</h5>
+                <p className="mb-2 md:mb-4 text-center text-sm md:text-base">Voir les familles.</p>
+                <div className="btn bg-gray-200 text-cyan-700 font-bold py-1.5 md:py-2 px-4 md:px-6 text-sm md:text-base rounded shadow hover:scale-105 transition">
                   Gérer les familles
                 </div>
               </div>
             </Link>
           </div>
         )}
+
         {role === 'admin' && (
           <Link href="/admin">
-            <div className="card bg-gradient-to-r from-purple-400 to-pink-400 text-gray-900 shadow-lg animate-pop p-4 md:p-8 flex flex-col items-center mt-10 max-w-4xl mx-5 md:mx-auto" style={{ animationDelay: '0.6s' }}>
-              <h5 className="text-3xl font-bold mb-2">Administration</h5>
-              <p className="mb-4 text-center">Gérer les utilisateurs, rôles et autres paramètres.</p>
-              <div className="btn bg-gray-200 text-purple-700 font-bold py-2 px-6 rounded shadow hover:scale-105 transition">
+            <div className="card bg-gradient-to-r from-purple-400 to-pink-400 text-gray-900 shadow-lg animate-pop p-3 md:p-8 flex flex-col items-center mt-4 md:mt-10 w-full max-w-sm md:max-w-4xl mx-auto px-4 md:px-0" style={{ animationDelay: '0.6s' }}>
+              <h5 className="text-xl md:text-3xl font-bold mb-1 md:mb-2">Administration</h5>
+              <p className="mb-2 md:mb-4 text-center text-sm md:text-base">Gérer les utilisateurs, rôles et autres paramètres.</p>
+              <div className="btn bg-gray-200 text-purple-700 font-bold py-1.5 md:py-2 px-4 md:px-6 text-sm md:text-base rounded shadow hover:scale-105 transition">
                 Administration
               </div>
             </div>
           </Link>
         )}
-      </div>
-      <SuccessModal showModal={showModal} setShowModal={setShowModal} type={type} />
-    </div>
+              </div>
+            </div>
   );
 }

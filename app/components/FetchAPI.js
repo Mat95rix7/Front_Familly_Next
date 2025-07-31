@@ -28,15 +28,15 @@ export async function apiFetch(path, options = {}) {
       ...(token ? { Authorization: `Bearer ${token}` } : {}),
     };
     const response = await fetch(url, { ...options, headers });
-    if (!response.ok) {
-      if (response.status === 401) {
-        removeStoredToken();
-        if (typeof window !== 'undefined') {
-          window.location.href = '/';
-        }
-      }
-      throw new Error(`Erreur HTTP ${response.status}: ${response.statusText}`);
-    }
+    // if (!response.ok) {
+    //   if (response.status === 401) {
+    //     removeStoredToken();
+    //     if (typeof window !== 'undefined') {
+    //       window.location.href = '/';
+    //     }
+    //   }
+    //   throw new Error(`Erreur HTTP ${response.status}: ${response.statusText}`);
+    // }
     return response;
     
   } catch (error) {

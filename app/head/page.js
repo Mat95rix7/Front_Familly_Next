@@ -1,44 +1,3 @@
-// "use client";
-// import Link from "next/link";
-// import { useAuth } from "../context/AuthContext";
-
-// export default function Navbar() {
-//   const { isConnected, logout, user } = useAuth();
-
-//   return (
-//       <nav className="w-full bg-gradient-to-r from-cyan-400 to-purple-700 border-b-4 border-cyan-400 shadow-lg py-2 px-6 flex items-center justify-between z-50 relative">
-//         <Link
-//           href="/"
-//           className="flex items-center space-x-3 group"
-//         >
-//           <span className="text-white text-2xl font-bold drop-shadow-[0_0_8px_#0dcaf0] group-hover:text-cyan-300 transition">
-//             Généalogie
-//           </span>
-//         </Link>
-//         <div className="flex items-center justify-center space-x-6">
-//           {isConnected && (
-//             <div className="flex items-center gap-6">
-
-
-//                 <div
-                  
-//                   className="text-white font-semibold hover:text-cyan-300 transition"
-//                 >
-//                   Bonjour, <span className="font-bold text-amber-400">{user.username.charAt(0).toUpperCase() + user.username.slice(1)}</span> 👋
-//                 </div>
-
-//               <div
-//                 onClick={logout}
-//                 className="text-white font-semibold hover:text-cyan-300 transition cursor-pointer"
-//               >
-//                 Déconnexion
-//               </div>
-//             </div>
-//           )}
-//         </div>
-//     </nav>
-//   );
-// }
 'use client';
 import React, { useState, useCallback, useEffect } from 'react';
 import  { useAuth }  from '../context/AuthContext';
@@ -55,13 +14,12 @@ import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
 
-export default function Navbar() {
+const HeaderComponent = () => {
 
     const router = useRouter();
     const [isOpen, setIsOpen] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-    const {logout, user } = useAuth();
-    console.log(user);
+    const { logout, user } = useAuth();
 
     const handleLogout = useCallback(async () => {
         try {
@@ -89,8 +47,7 @@ export default function Navbar() {
     const navItems = [
         { href: "/", label: "Accueil", icon: <IoHomeOutline className="w-6 h-6 text-amber-600" /> },
         { href: "/personnes", label: "Personnes", icon: <IoPersonCircleOutline className="w-6 h-6 text-amber-600" /> },
-        { href: "/familles", label: "Familles", icon: <IoPeopleOutline className="w-6 h-6 text-amber-600" /> },
-        
+        { href: "/familles", label: "Familles", icon: <IoPeopleOutline className="w-6 h-6 text-amber-600" /> }
     ];
 
     useEffect(() => {
@@ -104,7 +61,7 @@ export default function Navbar() {
     }, []);
 
     return (
-        <header className='w-full bg-gradient-to-r from-cyan-400 to-purple-700 border-b-4 border-cyan-400 shadow-lg py-2 px-6 flex items-center justify-between z-50 relative'>
+        <header className='fixed top-0 w-full min-w-[320px] h-14 sm:h-16 px-4 sm:px-6 lg:px-8 bg-gray-300 bg-opacity-50 dark:bg-black dark:bg-opacity-50 z-40 backdrop-blur-sm transition-all duration-300 ease-in-out'>
             <div className='container mx-auto px-2 sm:px-3 max-w-7xl flex items-center h-full'>
                 {/* Première section: Burger + Logo */}
                 <div className="flex items-center flex-shrink-0 mr-auto">
@@ -113,12 +70,12 @@ export default function Navbar() {
                     <Link href="/" className="flex items-center gap-2">
                         <Image 
                             src='/arbre.png'
-                            width={56}
-                            height={56} 
+                            width={48}
+                            height={48} 
                             alt='logo'
-                            className='w-10 h-10 sm:w-9 sm:h-9 md:w-10 md:h-10 rounded object-cover'
+                            className='w-8 h-8 sm:w-9 sm:h-9 md:w-10 md:h-10 rounded object-contain'
                         />
-                        <span className='!text-white text-2xl font-bold drop-shadow-[0_0_8px_#0dcaf0] group-hover:text-cyan-300 transition hidden md:block'>Genealogy</span>
+                        <h1 className='text-2xl sm:text-3xl md:text-4xl font-bold text-amber-600'>Genealogy</h1>
                     </Link>
                 </div>
 
@@ -148,12 +105,22 @@ export default function Navbar() {
                     {/* User Menu */}
                     <DropdownMenu open={isOpen} onOpenChange={setIsOpen}>
                         <DropdownMenuTrigger asChild>
-                            {user &&  (
-                                <div className="flex items-center gap-2 px-2 py-1 rounded-full hover:bg-gray-200 dark:hover:bg-gray-800 transition-colors">
-                                        
-                                            Bonjour, <span className="font-bold text-amber-400">{user.username.charAt(0).toUpperCase() + user.username.slice(1)}</span> 👋
-                                      
-                                </div>
+                            {user ? (
+                                <button className="flex items-center gap-2 px-2 py-1 rounded-full hover:bg-gray-200 dark:hover:bg-gray-800 transition-colors">
+                                        <span className="font-bold block text-amber-600 sm:hidden">
+                                            {(user.username)}
+                                        </span>
+                                </button>
+                            ) : (
+                                <Button variant="ghost" className="p-2">
+                                    <Image 
+                                        src='/user.png'
+                                        width={48}
+                                        height={48} 
+                                        alt="User" 
+                                        className="w-8 h-8"
+                                    />
+                                </Button>
                             )}
                         </DropdownMenuTrigger>
                         <DropdownMenuContent align="end" className="w-48 dark:bg-gray-100 bg-gray-900 text-amber-600 border-none rounded-lg shadow-lg">
@@ -168,11 +135,11 @@ export default function Navbar() {
                             ))}
                         </DropdownMenuContent>
                     </DropdownMenu>
-                    {/* Burger Menu */}
-                    <div className="md:hidden mr-1 ">
+                                        {/* Burger Menu */}
+                    <div className="md:hidden mr-1">
                         <DropdownMenu open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
                             <DropdownMenuTrigger asChild>
-                                <Button variant="ghost" size="icon" className="p-1 m-2 !bg-gray-800">
+                                <Button variant="ghost" size="icon" className="p-1 m-2">
                                     <GiHamburgerMenu  size={48} className="text-amber-600 stroke-2" />
                                 </Button>
                             </DropdownMenuTrigger>
@@ -200,3 +167,8 @@ export default function Navbar() {
         </header>
     );
 };
+
+const Header = React.memo(HeaderComponent);
+Header.displayName = 'Header';
+
+export default Header;
