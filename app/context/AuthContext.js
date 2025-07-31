@@ -89,6 +89,7 @@ export const AuthProvider = ({ children }) => {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ username, email, password }),
       });
+      
 
       if (!res.ok) {
         const errorData = await res.json();

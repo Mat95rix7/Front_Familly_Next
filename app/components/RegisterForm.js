@@ -13,6 +13,7 @@ const RegisterForm = () => {
   const [validation, setValidation] = useState("");
   const [validUsername, setValidUsername] = useState("")
   const [showModal, setShowModal] = useState(false);
+
   const router = useRouter();
   const { register } = useAuth();
 
@@ -67,7 +68,7 @@ const RegisterForm = () => {
                                  email: formData.email, 
                                  password : formData.password
                                 });
-          if (data.success) {        
+          if (data) {        
             setShowModal(true);
             setTimeout(() => {
               setShowModal(false);

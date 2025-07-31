@@ -1,5 +1,5 @@
 'use client';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import SuccessModal from './SuccessModal';
@@ -23,20 +23,20 @@ export function LoginForm() {
     try {
       const data = await login({username, password});
 
-      if (data === true) {
+      if (!data) {
+        setErrorAuth('Identifiants invalides');
+        return;
+      }
+
+      if (data.success) {
           setShowModal(true);
           setTimeout(() => {
             setShowModal(false);
             router.push('/')
           }, 2000);
       }
-      
-      
-    } catch (error) {
-      if (error.message) {
-        console.error(error);
-        setErrorAuth(error.message);
-      }
+    } catch (error) {     
+        setErrorAuth(error.code);
     } finally {
       setIsLoading(false);
     }

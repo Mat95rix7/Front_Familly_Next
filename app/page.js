@@ -49,9 +49,9 @@ export default function Home() {
           </div>
         )}
         {isConnected && (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8 justify-center">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8 justify-center max-w-4xl mx-auto">
             <Link href="/personnes">
-              <div className="card bg-gradient-to-r from-green-400 to-cyan-400 text-gray-900 shadow-lg animate-pop p-3 md:p-8 flex flex-col items-center  w-full max-w-sm md:max-w-4xl mx-auto px-4 md:px-0" style={{ animationDelay: '0.2s' }}>
+              <div className="card bg-gradient-to-r from-green-400 to-cyan-400 text-gray-900 shadow-lg animate-pop p-3 md:p-8 flex flex-col items-center  w-full max-w-sm md:max-w-lg mx-auto px-4 md:px-0" style={{ animationDelay: '0.2s' }}>
                 <h5 className="text-xl md:text-3xl font-bold mb-1 md:mb-2">Personnes</h5>
                 <p className="mb-2 md:mb-4 text-center text-sm md:text-base">Voir, ajouter ou modifier les membres.</p>
                 <div className="btn bg-gray-200 text-cyan-700 font-bold py-1.5 md:py-2 px-4 md:px-6 text-sm md:text-base rounded shadow hover:scale-105 transition">
@@ -61,7 +61,7 @@ export default function Home() {
             </Link>
 
             <Link href="/familles">
-              <div className="card bg-gradient-to-r from-cyan-400 to-blue-400 text-gray-900 shadow-lg animate-pop p-3 md:p-8 flex flex-col items-center  w-full max-w-sm md:max-w-4xl mx-auto px-4 md:px-0" style={{ animationDelay: '0.4s' }}>
+              <div className="card bg-gradient-to-r from-cyan-400 to-blue-400 text-gray-900 shadow-lg animate-pop p-3 md:p-8 flex flex-col items-center  w-full max-w-sm md:max-w-lg mx-auto px-4 md:px-0" style={{ animationDelay: '0.4s' }}>
                 <h5 className="text-xl md:text-3xl font-bold mb-1 md:mb-2">Familles</h5>
                 <p className="mb-2 md:mb-4 text-center text-sm md:text-base">Voir les familles.</p>
                 <div className="btn bg-gray-200 text-cyan-700 font-bold py-1.5 md:py-2 px-4 md:px-6 text-sm md:text-base rounded shadow hover:scale-105 transition">
