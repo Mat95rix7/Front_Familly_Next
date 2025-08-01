@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import Link from "next/link";
-import { apiFetch, getPhotoUrl } from "../../components/FetchAPI";
+import { apiFetch, getPhotoUrl } from "../../services/FetchAPI";
 import Image from "next/image";
 
 
