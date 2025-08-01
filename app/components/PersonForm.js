@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import { UserIcon, UsersIcon, CheckCircleIcon } from "@heroicons/react/24/solid";
 import { useRouter } from "next/navigation";
-import { apiFetch } from "./FetchAPI";
+import { apiFetch } from "../services/FetchAPI";
 
 export default function PersonForm({ 
   initialData = null, 

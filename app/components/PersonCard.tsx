@@ -1,7 +1,7 @@
 // components/PersonCard.tsx
 import Image from "next/image";
 import Link from "next/link";
-import { getPhotoUrl } from "../components/FetchAPI";
+import { getPhotoUrl } from "../services/FetchAPI";
 
 export default function PersonCard({ personne }) {
   const birthYear = personne.birth_date

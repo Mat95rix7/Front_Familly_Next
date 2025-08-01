@@ -1,7 +1,7 @@
 'use client';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { validateField } from './errorMessages';
+import { validateField } from '../services/errorMessages';
 import  Link  from 'next/link';
 import  SuccessModal  from './SuccessModal';
 import { useAuth } from '../context/AuthContext';

@@ -118,7 +118,7 @@ export default function Navbar() {
                             alt='logo'
                             className='w-10 h-10 sm:w-9 sm:h-9 md:w-10 md:h-10 rounded object-cover'
                         />
-                        <span className='!text-white text-2xl font-bold drop-shadow-[0_0_8px_#0dcaf0] group-hover:text-cyan-300 transition hidden lg:block'>Génealogie</span>
+                        <span className='!text-white text-2xl font-bold drop-shadow-[0_0_8px_#0dcaf0] group-hover:text-cyan-300 transition hidden lg:block'>Généalogie</span>
                     </Link>
                 </div>
 

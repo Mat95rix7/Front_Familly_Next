@@ -1,9 +1,10 @@
+'use client';
 import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
+import Link from "next/link";
 
 export default function NotFoundPage() {
   return (
-    <div className="flex flex-col items-center justify-center h-screen">
+    <div className="flex flex-col items-center justify-center h-screen dark-bg-animated">
       {/* Animation de 404 */}
       <motion.div
         initial={{ opacity: 0, y: -50 }}
@@ -16,7 +17,7 @@ export default function NotFoundPage() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.4, duration: 0.8 }}
-          className="text-2xl text-amber-500"
+          className="text-2xl text-white"
         >
           Oups ! La page que vous cherchez est introuvable.
         </motion.p>
@@ -30,8 +31,8 @@ export default function NotFoundPage() {
         className="mt-6"
       >
         <Link
-          to="/"
-          className="px-6 py-3 text-white bg-amber-700 rounded-lg shadow-lg hover:bg-amber-500 transition"
+          href="/"
+          className="px-6 py-3 !text-gray-800 bg-gradient-to-r from-cyan-400 to-blue-400 rounded-lg shadow-lg transition"
         >
           Retour à l&apos;accueil
         </Link>

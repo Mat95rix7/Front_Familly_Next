@@ -14,7 +14,7 @@ import {
   Calendar,
   TrendingUp
 } from 'lucide-react';
-import { apiFetch } from '../components/FetchAPI';
+import { apiFetch } from '../services/FetchAPI';
 
 const AdminDashboard = () => {
   const [activeTab, setActiveTab] = useState('stats');
@@ -72,14 +72,16 @@ const AdminDashboard = () => {
     if (!confirm('Êtes-vous sûr de vouloir supprimer cet utilisateur ?')) return;
     
     try {
-      const response = await apiFetchfetch(`/admin/users/${userId}`, {
+      const response = await apiFetch(`/admin/users/${userId}`, {
         method: 'DELETE'
       });
+      console.log(response);
       
       if (response.ok) {
         loadUsers(currentPage, searchTerm);
       } else {
         const error = await response.json();
+        console.log(error);
         alert(error.error);
       }
     } catch (error) {

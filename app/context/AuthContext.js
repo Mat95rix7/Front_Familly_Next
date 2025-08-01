@@ -2,7 +2,7 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { jwtDecode } from 'jwt-decode';
-import { apiFetch } from '../components/FetchAPI';
+import { apiFetch } from '../services/FetchAPI';
 
 const AuthContext = createContext();
 export default AuthContext;

@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { apiFetch } from "../components/FetchAPI";
+import { apiFetch } from "../services/FetchAPI";
 import PersonCard from "../components/PersonCard";
 import { useAuth } from "../context/AuthContext";
 

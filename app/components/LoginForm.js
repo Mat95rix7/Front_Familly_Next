@@ -28,7 +28,7 @@ export function LoginForm() {
         return;
       }
 
-      if (data.success) {
+      if (data) {
           setShowModal(true);
           setTimeout(() => {
             setShowModal(false);

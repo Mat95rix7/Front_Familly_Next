@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import PersonForm from "../../../components/PersonForm";
-import { apiFetch } from "../../../components/FetchAPI";
+import { apiFetch } from "../../../services/FetchAPI";
 
 export default function EditPersonne() {
   const { id } = useParams();

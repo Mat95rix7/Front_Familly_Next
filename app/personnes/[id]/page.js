@@ -11,7 +11,7 @@ import {
   InformationCircleIcon,
   TrashIcon,
 } from "@heroicons/react/24/solid";
-import { apiFetch, getPhotoUrl } from "../../components/FetchAPI";
+import { apiFetch, getPhotoUrl } from "../../services/FetchAPI";
 import Image from "next/image";
 import { useAuth } from "../../context/AuthContext";
 import { Trees, TreesIcon } from "lucide-react";
