@@ -60,12 +60,12 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   // 🔐 Login
-  const login = async ({ username, password }) => {
+  const login = async ({ email, password }) => {
     try {
       const res = await apiFetch('/auth/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username, password }),
+        body: JSON.stringify({ email, password }),
       });
       if (!res.ok) {       
         const errorData = await res.json();
